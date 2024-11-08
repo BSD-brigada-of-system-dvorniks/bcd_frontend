@@ -48,8 +48,8 @@ export default {
                 <!--<i class="bi bi-exclamation-diamond-fill"></i>
 									<i class="bi bi-exclamation-diamond-fill"></i>
 									<i class="bi bi-exclamation-diamond-fill"></i>-->
-                <i class="bi bi-diamond-half"></i>
-                <i class="bi bi-x-diamond"></i>
+                <i class="bi bi-diamond-half"></i> 
+                <i class="bi bi-x-diamond"></i> 
                 <i class="bi bi-exclamation-diamond"></i>
               </h4>
               <!--Уровень допуска: 5

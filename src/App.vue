@@ -2,9 +2,12 @@
 // import HelloWorld from './components/HelloWorld.vue'
 // import TheWelcome from './components/TheWelcome.vue'
 import TestMain from './components/TestMain.vue';
+import ObjectsList from './components/ObjectsList.vue';
 </script>
 
 <template>
+  <div width="100%" height="100%">
+    Pivo!
   <!-- <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
@@ -14,8 +17,10 @@ import TestMain from './components/TestMain.vue';
   </header> -->
 
   <!-- <main> -->
-    <TestMain />
+    <ObjectsList />
   <!-- </main> -->
+   Pivo!
+  </div>
 </template>
 
 <!-- <style scoped>
