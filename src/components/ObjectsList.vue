@@ -15,7 +15,7 @@ export default {
       info: {},
     };
   },
-  
+
   methods: {
     async getAnswer() {
       const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/objects/`);
@@ -24,18 +24,21 @@ export default {
     },
   },
 
-  beforeMount() {
+  mounted () {
     this.getAnswer();
   },
 };
 </script>
 
 <template>
-  <div class="border border-dashed border-white">
+  <!--Pivo pivo pivo pivo!
+  <p></p>
+  <hr/>-->
+  <div class="box-border border border-dashed border-white m-4 p-4 w-4/5 h-4/5 bg-zinc-900">
     <div v-for="object in info" class="">
       <!--<h3>BCD-00AC {{ object.name }} - {{ object.type }}</h3>
       <p>{{ object.text }}</p>-->
-      <p>BCD-00AC - {{ object.name }}</p>
+      <p><i class="bi bi-record-fill"></i> BCD-00AC - {{ object.name }}</p>
     </div>
   </div>
 </template>
