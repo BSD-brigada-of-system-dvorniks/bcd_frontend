@@ -1,6 +1,27 @@
 <script lang="ts">
     export default {
         name: "WelcomePost",
+
+        data() {
+            const now = new Date();
+
+            // Format time (HH:mm)
+            const now_time = new Intl.DateTimeFormat('ru-RU', {
+            hour: '2-digit',
+            minute: '2-digit',
+            }).format(now);
+
+            // Format date (DD.MM.YYYY)
+            const now_date = new Intl.DateTimeFormat('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            }).format(now);
+
+            return {
+                now_datetime: `${now_time} ${now_date}`,
+            };
+        },
     };
 </script>
 
@@ -37,9 +58,9 @@
                 <p class="mb-4 text-justify">
                     Добро пожаловать в Ковенант, сотрудник.
                 </p>
-                <p class="mb-5 text-end">
-                    Куратор научного отдела, доктор Дексман <i class="bi bi-person-square"></i>
-                </p>
+                <!--<p class="mb-5 text-end">
+                    Куратор научного отдела, доктор Дексман <i class="bi bi-person-fill"></i>
+                </p>-->
                 <!--<form>
                         <button id="enter_button" class="border border-white text-white p-2 w-full box-border">
                             <RouterLink to="/main">Войти</RouterLink>
@@ -56,6 +77,11 @@
                             <span>> Войти</span>
                         </button>
                     </p>-->
+                    <p class="mt-4 text-end">
+                <span>{{now_datetime}}</span>
+                <br>
+                <span>Доктор Дексман, старший исследователь</span>
+                </p>
             </div>
         </div>
         <div></div>
