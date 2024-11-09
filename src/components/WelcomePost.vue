@@ -1,10 +1,7 @@
 <script lang="ts">
-import axios from 'axios'
-
-export default {
-    name: "ObjectsList",
-
-};
+    export default {
+        name: "WelcomePost",
+    };
 </script>
 
 <template>
@@ -65,7 +62,7 @@ export default {
 </template>
 
 <style scoped>
-.font-logo {
-    font-family: 'Share Tech Mono', monospace;
-}
+    .font-logo {
+        font-family: 'Share Tech Mono', monospace;
+    }
 </style>
