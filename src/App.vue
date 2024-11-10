@@ -7,7 +7,7 @@ import WelcomePost from './components/WelcomePost.vue';
 </script>
 
 <template>
-    <div class="w-screen h-screen flex justify-center items-center bg-zinc-950">
+    <div class="w-full min-h-screen flex justify-center items-center bg-zinc-950 py-8">
         <router-view class="view main-content" />
     </div>
 </template>

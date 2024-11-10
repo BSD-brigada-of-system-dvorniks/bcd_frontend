@@ -1,71 +1,100 @@
 <script lang="ts">
-import axios from 'axios'
+    import axios from 'axios'
 
-export default {
-  name: "ObjectsList",
+    export default {
+        name: "ObjectsList",
 
-  /* mounted() {
-    const tailwind_script = document.createElement("script");
-    tailwind_script.src = "https://cdn.tailwindcss.com";
-    document.body.appendChild(tailwind_script);
-  },*/
+        data() {
+            return {
+                info: {},
+                loading: true,
+            };
+        },
 
-  data() {
-    return {
-      info: {},
+        methods: {
+            async getAnswer() {
+                const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/objects/`);
+                console.log(data);
+                this.info = data;
+                this.loading = false;
+            },
+        },
+
+        beforeMount() {
+            this.getAnswer();
+        },
     };
-  },
-
-  methods: {
-    async getAnswer() {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/objects/`);
-      console.log(data);
-      this.info = data;
-    },
-  },
-
-  mounted() {
-    this.getAnswer();
-  },
-};
 </script>
 
 <template>
-  <!--Pivo pivo pivo pivo!
-  <p></p>
-  <hr/>-->
-  <div class="box-border border border-dashed border-white m-4 p-4 w-4/5 min-h-4/5 bg-zinc-900">
+    <div class="w-screen grid grid-cols-12 gap-4">
+        <div></div>
+        <div></div>
+        <div class="col-span-4">
+            <div class="bg-zinc-900 text-white border border-white border-dashed p-4 mb-4">
+                <p class="text-xl">BCD</p>
+                <hr class="my-4"/>
+                <ul class="list-disc ms-4">
+                    <li>BCD 0001-0010</li>
+                    <li>BCD 0011-0020</li>
+                    <li>BCD 0021-0030</li>
+                </ul>
+            </div>
+            <div class="bg-zinc-900 text-white border border-white border-dashed p-4 mb-4">
+                <p class="text-xl">RESEARCH</p>
+                <hr class="my-4"/>
+                <ul class="list-disc ms-4">
+                    <li>Applied Physics Division</li>
+                    <li>Bioengineering and Medicine Division</li>
+                    <li>Information Technology Division</li>
+                </ul>
+            </div>
+            <div class="bg-zinc-900 text-white border border-white border-dashed p-4 mb-4">
+                <p class="text-xl">EQUIPMENT</p>
+                <hr class="my-4"/>
+                <ul class="list-disc ms-4">
+                    <li>Capture Task Force Equipment</li>
+                    <li>Capture Task Force Equipment</li>
+                    <li>Capture Task Force Equipment</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-span-4">
+            <div v-if="!loading" class="bg-zinc-900 text-white border border-white border-dashed p-8">
+                <p class="mb-4 text-2xl flex justify-between items-center">
+                    <span class="font-logo"><i class="bi bi-globe"></i> COVENANT</span>
+                    <span>DOC-01AF</span>
+                </p>
+                <hr class="mb-4">
 
-    <p class="mb-4 text-2xl flex justify-between items-center">
-      <span class="font-logo"><i class="bi bi-globe"></i> COVENANT</span>
-      <span>DOC-01AF</span>
-    </p>
-    <hr class="mb-4">
+                <div v-for="n in 4">
+                    <div v-for="object in info" class="mb-2 hover:ms-4 duration-200">
+                        <p v-if="object.type === 'Green'">
+                            <i class="bi bi-3-square-fill text-green-500"></i> BCD-00AC - {{ object.name }} - {{ object.type }}
+                        </p>
+                        <p v-if="object.type === 'Yellow'">
+                            [3] BCD-00AC - {{ object.name }} - {{ object.type }}
+                        </p>
+                        <p v-if="object.type === 'Red'" class="cursor-pointer">
+                            <span class="text-red-500">[3]</span> <span class="underline">BCD-00AC - {{ object.name }}</span>
+                        </p>
+                    </div>
+                </div>
 
-    <div v-for="n in 6">
-      <div v-for="object in info">
-        <p v-if="object.type === 'Green'">
-          <i class="bi bi-3-square-fill text-green-500"></i> BCD-00AC - {{ object.name }} - {{ object.type }}
-        </p>
-        <p v-if="object.type === 'Yellow'">
-          [3] BCD-00AC - {{ object.name }} - {{ object.type }}
-        </p>
-        <p v-if="object.type === 'Red'" class="cursor-pointer">
-          <span class="text-red-500">[3]</span> <span class="underline">BCD-00AC - {{ object.name }}</span>
-        </p>
-      </div>
+                <p class="place-self-end mt-4 text-end">
+                    <span>13:23 09.11.2001</span>
+                    <br>
+                    <span>Доктор Дексман, старший исследователь</span>
+                </p>
+            </div>
+        </div>
+        <div></div>
+        <div></div>
     </div>
-
-    <p class="place-self-end mt-4 text-end">
-      <span>09.11.2024</span>
-      <br>
-      <span>Доктор Дексман, старший исследователь</span>
-    </p>
-  </div>
 </template>
 
 <style scoped>
-.font-logo {
-  font-family: 'Share Tech Mono', monospace;
-}
+    .font-logo {
+        font-family: 'Share Tech Mono', monospace;
+    }
 </style>

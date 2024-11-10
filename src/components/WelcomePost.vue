@@ -26,7 +26,7 @@
 </script>
 
 <template>
-    <div class="grid grid-cols-12 place-items-center">
+    <div class="w-screen grid grid-cols-12 gap-4">
         <div></div>
         <div></div>
         <div></div>
