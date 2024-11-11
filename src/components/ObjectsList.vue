@@ -1,19 +1,20 @@
 <script lang="ts">
     import axios from 'axios'
+    import type { ObjectsResponse } from '@/types/ApiResponse';
 
     export default {
         name: "ObjectsList",
 
         data() {
             return {
-                info: {},
+                info: [] as ObjectsResponse,
                 loading: true,
             };
         },
 
         methods: {
             async getAnswer() {
-                const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/articles/objects/`);
+                const { data } = await axios.get<ObjectsResponse>(`${import.meta.env.VITE_BACKEND_URL}/articles/objects/`);
                 console.log(data);
                 this.info = data;
                 this.loading = false;
@@ -68,7 +69,7 @@
                 <hr class="mb-4">
 
                 <div v-for="n in 3">
-                    <div v-for="object in info" class="mb-2 hover:ms-4 duration-200">
+                    <div v-for="(object, index) in info" :key="index" class="mb-2 hover:ms-4 duration-200">
                         <p v-if="object.type === 'Green'" class="flex justify-between cursor-pointer">
                             <span><i class="bi bi-3-square-fill text-green-500"></i> BCD-00AC - {{ object.article.name }} - {{ object.type }}</span>
                             <span>Published: {{ object.article.published }}</span>
