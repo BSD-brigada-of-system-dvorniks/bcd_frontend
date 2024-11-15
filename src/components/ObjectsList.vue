@@ -76,7 +76,7 @@
                             <span>Published: {{ object.article.published }}</span>
                         </p>
                         <p v-if="object.type === 'Yellow'" class="flex justify-between cursor-pointer">
-                            <span>[3] BCD-00AC - {{ object.article.name }} - {{ object.type }}</span>
+                            <span><span class="text-yellow-500">[3]</span> BCD-00AC - {{ object.article.name }} - {{ object.type }}</span>
                             <span>Published: {{ object.article.published }}</span>
                         </p>
                         <p v-if="object.type === 'Red'" class="flex justify-between cursor-pointer">
