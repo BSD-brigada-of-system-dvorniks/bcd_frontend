@@ -10,4 +10,6 @@ export interface ObjectResponse{
     article: Article;
 };
 
-export type ObjectsResponse = ObjectResponse[];
+export interface ObjectsApiResponse {
+    objects: ObjectResponse[];
+}

@@ -31,7 +31,7 @@
         <div></div>
         <div></div>
         <div class="col-span-6">
-            <div class="bg-zinc-900 text-white border border-white border-dashed p-8">
+            <div class="bg-zinc-900 text-white border border-white border-dashed p-4">
                 <p class="mb-4 text-2xl flex justify-between items-center">
                     <span class="font-logo"><i class="bi bi-globe"></i> COVENANT</span>
                     <span>MSG-0XF4</span>
@@ -68,19 +68,20 @@
                     </form>-->
                 <RouterLink to="/main">
                     <div class="border border-white text-white text-center p-2 w-full box-border cursor-pointer">
-                        Войти
+                        » Войти
                     </div>
                 </RouterLink>
+                <hr class="my-4" />
                 <!--<hr class="my-4" />-->
                 <!--<p class="text-center underline cursor-pointer">
                         <button class="w-full border-b">
                             <span>> Войти</span>
                         </button>
                     </p>-->
-                    <p class="mt-4 text-end">
-                <span>{{now_datetime}}</span>
-                <br>
-                <span>Доктор Дексман, старший исследователь</span>
+                <p class="mt-4 text-end">
+                    <span>{{now_datetime}}</span>
+                    <br>
+                    <span>Доктор Дексман, старший исследователь</span>
                 </p>
             </div>
         </div>

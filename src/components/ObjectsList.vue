@@ -1,22 +1,22 @@
 <script lang="ts">
     import axios from 'axios'
-    import type { ObjectsResponse } from '@/types/ApiResponse';
+    import type { ObjectResponse, ObjectsApiResponse } from '@/types/ApiResponse';
 
     export default {
         name: "ObjectsList",
 
         data() {
             return {
-                info: [] as ObjectsResponse,
+                info: [] as ObjectResponse[],
                 loading: true,
             };
         },
 
         methods: {
             async getAnswer() {
-                const { data } = await axios.get<ObjectsResponse>(`${import.meta.env.VITE_BACKEND_URL}/articles/objects/`);
+                const { data } = await axios.get<ObjectsApiResponse >(`${import.meta.env.VITE_BACKEND_URL}/articles/objects/`);
                 console.log(data);
-                this.info = data;
+                this.info = data.objects;
                 this.loading = false;
             },
         },
@@ -66,6 +66,7 @@
                     <span class="font-logo"><i class="bi bi-globe"></i> COVENANT</span>
                     <span>DOC-01AF</span>
                 </p>
+                
                 <hr class="mb-4">
 
                 <div v-for="n in 3">
@@ -84,6 +85,8 @@
                         </p>
                     </div>
                 </div>
+                
+                <hr class="my-4">
 
                 <p class="place-self-end mt-4 text-end">
                     <span>13:23 09.11.2001</span>
