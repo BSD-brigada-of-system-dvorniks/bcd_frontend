@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import WelcomePost from '../components/WelcomePost.vue';
-import ObjectsList from '../components/ObjectsList.vue';  
+import WelcomePost from '../views/WelcomePost.vue';
+import MainPage from '../views/MainPage.vue';
 
 const routes = [
     {
@@ -10,7 +10,7 @@ const routes = [
     },
     {
         path: '/main',
-        component: ObjectsList
+        component: MainPage
     },
 ];
 
