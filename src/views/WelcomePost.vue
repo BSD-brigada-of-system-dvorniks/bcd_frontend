@@ -79,7 +79,7 @@
                         </button>
                     </p>-->
                 <p class="mt-4 text-end">
-                    <span>{{now_datetime}}</span>
+                    <span>{{ now_datetime }}</span>
                     <br>
                     <span>Доктор Дексман, старший исследователь</span>
                 </p>

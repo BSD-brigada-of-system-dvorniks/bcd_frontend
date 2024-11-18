@@ -14,8 +14,12 @@ export default {
     <div class="w-screen grid grid-cols-12 gap-4">
         <div></div>
         <div></div>
-        <ObjectsMenu />
-        <ObjectsList />
+        <div class="col-span-4">
+            <ObjectsMenu />
+        </div>
+        <div class="col-span-4">
+            <ObjectsList />
+        </div>
         <div></div>
         <div></div>
     </div>

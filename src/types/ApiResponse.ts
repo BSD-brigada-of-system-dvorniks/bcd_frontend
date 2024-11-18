@@ -1,3 +1,10 @@
+export interface User {
+    id: string;
+    username: string;
+    email: string;
+}
+
+
 export interface ArticleBasicResponse {
     name: string;
     published: boolean;
@@ -6,7 +13,7 @@ export interface ArticleBasicResponse {
 export interface Article {
     name: string;
     text: string;
-    author: string;
+    author: User;
 }
 
 export interface ObjectBasicResponse{
