@@ -1,20 +1,20 @@
 <script lang="ts">
 import axios from 'axios'
-import type { ObjectResponse, ObjectsApiResponse } from '@/types/ApiResponse';
+import type { ObjectBasicResponse, ObjectsListResponse } from '@/types/ApiResponse';
 
 export default {
     name: "ObjectsList",
 
     data() {
         return {
-            info: [] as ObjectResponse[],
+            info: [] as ObjectBasicResponse[],
             loading: true,
         };
     },
 
     methods: {
         async getAnswer() {
-            const { data } = await axios.get<ObjectsApiResponse>(`${import.meta.env.VITE_BACKEND_URL}/articles/objects/`);
+            const { data } = await axios.get<ObjectsListResponse>(`${import.meta.env.VITE_BACKEND_URL}/articles/objects/`);
             console.log(data);
             this.info = data.objects;
             this.loading = false;
@@ -39,18 +39,22 @@ export default {
             <!-- <div v-for="n in 3"> -->
             <div v-for="(object, index) in info" :key="index" class="mb-2 hover:ms-4 duration-200">
                 <p v-if="object.type === 'Green'" class="flex justify-between cursor-pointer">
-                    <span><i class="bi bi-3-square-fill text-green-500"></i> BCD-00AC - {{ object.article.name }} -
-                        {{ object.type }}</span>
-                    <span>Published: {{ object.article.published }}</span>
+                    <RouterLink :to="`/objects/${object.id}`">
+                        <span><i class="bi bi-3-square-fill text-green-500"></i> BCD-00AC - {{ object.article.name }} - {{ object.type }}</span>
+                        <span>Published: {{ object.article.published }}</span>
+                    </RouterLink>
                 </p>
                 <p v-if="object.type === 'Yellow'" class="flex justify-between cursor-pointer">
-                    <span>[3] BCD-00AC - {{ object.article.name }} - {{ object.type }}</span>
-                    <span>Published: {{ object.article.published }}</span>
+                    <RouterLink :to="`/objects/${object.id}`">
+                        <span>[3] BCD-00AC - {{ object.article.name }} - {{ object.type }}</span>
+                        <span>Published: {{ object.article.published }}</span>
+                    </RouterLink>
                 </p>
                 <p v-if="object.type === 'Red'" class="flex justify-between cursor-pointer">
-                    <span><span class="text-red-500">[3]</span> <span class="underline">BCD-00AC - {{
-                            object.article.name }}</span></span>
-                    <span>Published: {{ object.article.published }}</span>
+                    <RouterLink :to="`/objects/${object.id}`">
+                        <span><span class="text-red-500">[3]</span> <span class="underline">BCD-00AC - {{ object.article.name }}</span></span>
+                        <span>Published: {{ object.article.published }}</span>
+                    </RouterLink>
                 </p>
             </div>
             <!-- </div> -->
