@@ -1,4 +1,4 @@
-export interface User {
+export interface UserResponse {
     id: string;
     username: string;
     email: string;
@@ -13,11 +13,11 @@ export interface ArticleBasicResponse {
 export interface Article {
     name: string;
     text: string;
-    author: User;
+    author: UserResponse;
 }
 
-export interface ObjectBasicResponse{
-    id : string;
+export interface ObjectBasicResponse {
+    id: string;
     type: string;
     level: number;
     article: ArticleBasicResponse;
@@ -27,9 +27,13 @@ export interface ObjectsListResponse {
     objects: ObjectBasicResponse[];
 }
 
-export interface ObjectResponse{
-    id : string;
+export interface ObjectResponse {
+    id: string;
     type: string;
     level: number;
     article: Article;
+}
+
+export interface LoginResponse {
+    token: string;
 }

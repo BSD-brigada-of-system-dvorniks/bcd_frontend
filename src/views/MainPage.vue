@@ -1,11 +1,11 @@
 <script lang="ts">
-import ObjectsList from '@/components/ObjectsList.vue';
+import MainComputer from '@/components/MainComputer.vue';
 import ObjectsMenu from '@/components/ObjectsMenu.vue';
 export default {
     name: "MainPage",
     components: {
         ObjectsMenu,
-        ObjectsList,
+        MainComputer
     }
 }
 </script>
@@ -18,7 +18,7 @@ export default {
             <ObjectsMenu />
         </div>
         <div class="col-span-4">
-            <ObjectsList />
+            <MainComputer />
         </div>
         <div></div>
         <div></div>
