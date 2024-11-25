@@ -1,28 +1,46 @@
 <script lang="ts">
-    export default {
-        name: "WelcomePost",
+import router from '@/router';
 
-        data() {
-            const now = new Date();
+export default {
+    name: "WelcomePost",
 
-            // Format time (HH:mm)
-            const now_time = new Intl.DateTimeFormat('ru-RU', {
+    data() {
+        const now = new Date();
+
+        // Format time (HH:mm)
+        const now_time = new Intl.DateTimeFormat('ru-RU', {
             hour: '2-digit',
             minute: '2-digit',
-            }).format(now);
+        }).format(now);
 
-            // Format date (DD.MM.YYYY)
-            const now_date = new Intl.DateTimeFormat('ru-RU', {
+        // Format date (DD.MM.YYYY)
+        const now_date = new Intl.DateTimeFormat('ru-RU', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
-            }).format(now);
+        }).format(now);
 
-            return {
-                now_datetime: `${now_time} ${now_date}`,
-            };
-        },
-    };
+        return {
+            now_datetime: `${now_time} ${now_date}`,
+        };
+    },
+
+    methods: {
+        isFirstLoad() {
+            if (this.$cookie.isCookieAvailable("firstEnter")) {
+                return false;
+            }
+            this.$cookie.setCookie("firstEnter", "true", { expire: Infinity });
+            return true;
+        }
+    },
+
+    beforeMount() {
+        if (!this.isFirstLoad()) {
+            router.push("/main");
+        }
+    },
+};
 </script>
 
 <template>
@@ -92,7 +110,7 @@
 </template>
 
 <style scoped>
-    .font-logo {
-        font-family: 'Share Tech Mono', monospace;
-    }
+.font-logo {
+    font-family: 'Share Tech Mono', monospace;
+}
 </style>

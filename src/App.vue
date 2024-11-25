@@ -3,7 +3,7 @@
 
 <template>
     <div class="w-full min-h-screen flex justify-center items-center bg-zinc-950 py-8">
-        <router-view class="view main-content" />
+        <RouterView class="view main-content" />
     </div>
 </template>
 
