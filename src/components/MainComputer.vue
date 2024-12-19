@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { LoginRequest } from '@/types/ApiRequest';
 import type{ LoginResponse } from '@/types/ApiResponse';
-import axios, { type AxiosResponse } from 'axios'
+import axios, { AxiosError, type AxiosResponse } from 'axios'
 
 export default {
     data() {
@@ -19,9 +19,15 @@ export default {
                 )).data;
                 console.log(this.loginResponse.token);
             }
-            catch {
-                console.log("dfd")
+            catch (error) {
+                const err = error as AxiosError<LoginResponse>;
+                this.loginResponse = err.response?.data as LoginResponse;
             }
+        }
+    },
+    computed: {
+        checkResponseError() : boolean {
+            return this.loginResponse.error === "Invalid credentials";
         }
     }
 }
@@ -44,21 +50,22 @@ export default {
                 </p>
                 <div class="mb-0 text-terminal">
                     Username:
-                    <input v-model="loginRequest.username" 
-                        placeholder="User Name" 
-                        class="bg-zinc-900 text-terminal border-0 border-terminal animate-pulse" 
+                    <input v-model="loginRequest.username"
+                        placeholder="User Name"
+                        class="bg-zinc-900 text-terminal border-0 border-terminal animate-pulse"
                         value="testuser3">
                 </div>
                 <div class="mb-6 text-terminal">
                     Password:
-                    <input v-model="loginRequest.password" 
-                        placeholder="Password" 
-                        class="bg-zinc-900 text-terminal border-0 border-terminal animate-pulse" 
+                    <input v-model="loginRequest.password"
+                        placeholder="Password"
+                        class="bg-zinc-900 text-terminal border-0 border-terminal animate-pulse"
                         value="Durka1337!">
                 </div>
                 <button class="text-terminal" @click="submitLogin">
                     > Submit
                 </button>
+                <div v-if="checkResponseError" class="text-terminal text-terminal-error">{{loginResponse.error}}</div>
             </div>
         </div>
     </div>
@@ -95,6 +102,10 @@ export default {
         font-family: "Share Tech Mono", system-ui;
         line-height: 1.5rem;
 
+    }
+    .text-terminal-error {
+        color: #a10e0e;
+        text-shadow: 0 0 2px #a10e0e;
     }
     .border-terminal {
         border-color: #13A10E;
