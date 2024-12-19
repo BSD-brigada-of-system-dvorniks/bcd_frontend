@@ -55,7 +55,6 @@ export default {
         if (this.$cookie.isCookieAvailable("userToken")){
             this.userLoaded = true;
             this.getUserData();
-            console.log("user is available")
         }
     }
 }
