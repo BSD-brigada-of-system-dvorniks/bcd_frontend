@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { LoginRequest } from '@/types/ApiRequest';
-import type{ LoginResponse } from '@/types/ApiResponse';
+import type{ LoginResponse, UserResponse } from '@/types/ApiResponse';
 import axios, { AxiosError, type AxiosResponse } from 'axios'
 
 export default {
@@ -8,6 +8,13 @@ export default {
         return {
             loginRequest: {} as LoginRequest,
             loginResponse: {} as LoginResponse,
+            userResponse: {} as UserResponse,
+            userLoaded: false as boolean,
+        }
+    },
+    computed: {
+        checkResponseError() : boolean {
+            return this.loginResponse.error === "Invalid credentials";
         }
     },
     methods: {
@@ -17,17 +24,38 @@ export default {
                     `${import.meta.env.VITE_BACKEND_URL}/accounts/login/`,
                     this.loginRequest
                 )).data;
-                console.log(this.loginResponse.token);
+
+                this.$cookie.setCookie("userToken", this.loginResponse.token, { expire: Infinity });
+                this.getUserData();
             }
             catch (error) {
                 const err = error as AxiosError<LoginResponse>;
                 this.loginResponse = err.response?.data as LoginResponse;
             }
+        },
+        async getUserData() {
+            try {
+                this.userResponse = (await axios.get<UserResponse>(
+                    `${import.meta.env.VITE_BACKEND_URL}/accounts/profile/`,
+                    {
+                        headers:{
+                            "Authorization": "Token " + this.$cookie.getCookie("userToken")
+                        }
+                    }
+                )).data;
+                this.userLoaded = true;
+            }
+            catch (error){
+                console.log(error);
+                this.userLoaded = false;
+            }
         }
     },
-    computed: {
-        checkResponseError() : boolean {
-            return this.loginResponse.error === "Invalid credentials";
+    beforeMount() {
+        if (this.$cookie.isCookieAvailable("userToken")){
+            this.userLoaded = true;
+            this.getUserData();
+            console.log("user is available")
         }
     }
 }
@@ -44,7 +72,7 @@ export default {
     <!-- Login -->
     <div class="bg-zinc-200 shadow-inner shadow-zinc-700 p-4">
         <div class="bg-zinc-900 p-0">
-            <div class="select-none py-6 px-4 font-logo text-2xl content-center text-start terminal">
+            <div v-if="!userLoaded" class="select-none py-6 px-4 font-logo text-2xl content-center text-start terminal">
                 <p class="text-terminal mb-6">
                     You are not authorized. Please, authorize in system before start working.
                 </p>
@@ -66,6 +94,11 @@ export default {
                     > Submit
                 </button>
                 <div v-if="checkResponseError" class="text-terminal text-terminal-error">{{loginResponse.error}}</div>
+            </div>
+            <div v-else class="select-none py-6 px-4 font-logo text-2xl content-center text-start terminal">
+                <p class="text-terminal mb-6">
+                    {{userResponse.username}} <br> {{ userResponse.email }}
+                </p>
             </div>
         </div>
     </div>
