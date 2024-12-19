@@ -33,6 +33,24 @@ export default {
                 this.loginResponse = err.response?.data as LoginResponse;
             }
         },
+        async submitLogout(){
+            try {
+                const logoutResponse = (await axios.post(
+                    `${import.meta.env.VITE_BACKEND_URL}/accounts/logout/`, {},
+                    {
+                        headers : {
+                            "Authorization": "Token " + this.$cookie.getCookie("userToken")
+                        }
+                    }
+                )).data;
+                console.log(logoutResponse.message);
+                this.$cookie.removeCookie("userToken");
+                this.userLoaded = false;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        },
         async getUserData() {
             try {
                 this.userResponse = (await axios.get<UserResponse>(
@@ -47,6 +65,7 @@ export default {
             }
             catch (error){
                 console.log(error);
+                this.$cookie.removeCookie("userToken");
                 this.userLoaded = false;
             }
         }
@@ -98,6 +117,9 @@ export default {
                 <p class="text-terminal mb-6">
                     {{userResponse.username}} <br> {{ userResponse.email }}
                 </p>
+                <button class="text-terminal" @click="submitLogout">
+                    > Logout
+                </button>
             </div>
         </div>
     </div>
